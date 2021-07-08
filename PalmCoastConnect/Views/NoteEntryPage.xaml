@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PalmCoastConnect.Views.NoteEntryPage"
+    Title="Palm Coast Connect">
+    <StackLayout Margin="20">
+        <Editor Placeholder="Enter your note"
+                Text="{Binding Text}"
+                HeightRequest="100"></Editor>
+        <Grid ColumnDefinitions="*,*">
+            <Button Text="Save" Clicked="onSaveButtonClicked"></Button>
+            <Button Text="Delete" Clicked="onDeleteButtonClicked"></Button>
+        </Grid>
+    </StackLayout>
+</ContentPage>
