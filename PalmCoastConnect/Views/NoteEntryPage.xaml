@@ -9,8 +9,8 @@
                 Text="{Binding Text}"
                 HeightRequest="100"></Editor>
         <Grid ColumnDefinitions="*,*">
-            <Button Text="Save" Clicked="onSaveButtonClicked"></Button>
-            <Button Text="Delete" Clicked="onDeleteButtonClicked"></Button>
+            <Button Text="Save" ></Button>
+            <Button Text="Delete" ></Button>
         </Grid>
     </StackLayout>
 </ContentPage>

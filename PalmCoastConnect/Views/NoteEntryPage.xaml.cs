@@ -49,8 +49,7 @@ namespace PalmCoastConnect.Views
             if (string.IsNullOrWhiteSpace(note.Filename))
             {
                 // Save the file.
-                var filename = Path.Combine(App.FolderPath, $"{Path.GetRandomFileName()}.notes.txt");
-                File.WriteAllText(filename, note.Text);
+               
             }
             else
             {
