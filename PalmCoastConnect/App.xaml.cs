@@ -16,6 +16,7 @@ namespace PalmCoastConnect
 
         protected override void OnStart()
         {
+            Application.Current.Properties["StrapiUrl"] = "https://manage.palmcoast.gov/graphql";
         }
 
         protected override void OnSleep()

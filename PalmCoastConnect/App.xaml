@@ -3,6 +3,6 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PalmCoastConnect.App">
     <Application.Resources>
-
+        <StyleSheetExtension Source="../Assets/style.css"></StyleSheetExtension>
     </Application.Resources>
 </Application>
