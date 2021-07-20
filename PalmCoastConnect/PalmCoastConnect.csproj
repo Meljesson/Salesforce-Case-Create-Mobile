@@ -21,6 +21,7 @@
     <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="3.2.4" />
     <PackageReference Include="Library.SfFactory.Service" Version="5.0.2" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Models\" />
@@ -29,6 +30,7 @@
     <None Remove="Microsoft.Extensions.DependencyInjection" />
     <None Remove="ViewModel\" />
     <None Remove="Mobile.BuildTools" />
+    <None Remove="Xamarin.FFImageLoading.Svg.Forms" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

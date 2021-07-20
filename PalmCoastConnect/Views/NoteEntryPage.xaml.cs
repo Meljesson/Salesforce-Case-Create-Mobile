@@ -3,76 +3,51 @@ using System.Collections.Generic;
 using System.IO;
 using PalmCoastConnect.Models;
 using Xamarin.Forms;
-
+using CMS.Service.ConnectCases;
 namespace PalmCoastConnect.Views
 {
-    [QueryProperty(nameof(ItemId), nameof(ItemId))]
+   
     public partial class NoteEntryPage : ContentPage
     {
-        public string ItemId
-        {
-            set
-            {
-                LoadNote(value);
-            }
-        }
+        private Catergory _CaseCategory { get; set;}
+        private Dictionary<string, RequestType> RequestMap { get; set; }
 
-        public NoteEntryPage()
+        public NoteEntryPage(Catergory catergory)
         {
             InitializeComponent();
-
-            BindingContext = new Note();
+            //Console.WriteLine(catergory.Title + " Loaded");
+            _CaseCategory = catergory;
         }
-
-        void LoadNote(string filename)
+        protected override void OnAppearing()
         {
-            try
+            var requestTypes = _CaseCategory.RequestType;
+            RequestMap = new Dictionary<string, RequestType>();
+            List<string> RqTypeTitle = new List<string>();
+            foreach(var rtype in requestTypes)
             {
-                Note note = new Note
-                {
-                    Filename = filename,
-                    Text = File.ReadAllText(filename),
-                    Date = File.GetCreationTime(filename)
-                };
-                BindingContext = note;
-            }
-            catch(Exception)
-            {
-                Console.WriteLine("Failed to load Note");
-            }
-        }
+                RqTypeTitle.Add(rtype.Title);
+                RequestMap.Add(rtype.Title, rtype);
 
-        async void OnSaveButtonClicked(object sender, EventArgs e)
-        {
-            var note = (Note)BindingContext;
-
-            if (string.IsNullOrWhiteSpace(note.Filename))
+            }
+            RequestList.ItemsSource = RqTypeTitle;
+            RequestList.ItemTapped += async (s, e) =>
             {
-                // Save the file.
+                var emi = e.Item;
+                if (Navigation.NavigationStack.Count == 0 ||
+                     Navigation.NavigationStack[Navigation.NavigationStack.Count - 1].GetType() != typeof(CaseRequestSubType))
+                { 
+
+                    
+                   await Navigation.PushAsync(new CaseRequestSubType(RequestMap[emi.ToString()]));
+                }
+                
                
-            }
-            else
-            {
-                // Update the file.
-                File.WriteAllText(note.Filename, note.Text);
-            }
+               
+            };
 
-            // Navigate backwards
-            await Shell.Current.GoToAsync("..");
         }
 
-        async void OnDeleteButtonClicked(object sender, EventArgs e)
-        {
-            var note = (Note)BindingContext;
 
-            // Delete the file.
-            if (File.Exists(note.Filename))
-            {
-                File.Delete(note.Filename);
-            }
 
-            // Navigate backwards
-            await Shell.Current.GoToAsync("..");
-        }
     }
 }

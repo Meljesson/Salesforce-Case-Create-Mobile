@@ -2,9 +2,10 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="PalmCoastConnect.Views.NoteEntryPage"
-    Title="Choose Case Type">
-     <ListView x:Name="RequestList" RowHeight="125">
+    x:Class="PalmCoastConnect.Views.CaseRequestSubType">
+    <ContentPage.Content>
+        <ListView x:Name="SubTypeList" RowHeight="125">
          
      </ListView>
+    </ContentPage.Content>
 </ContentPage>

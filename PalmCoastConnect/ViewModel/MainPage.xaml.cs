@@ -11,18 +11,19 @@ using PalmCoastConnect.Views;
 using Library.SfFactory.Service;
 using CMS.Service.Client;
 using CMS.Service.ConnectCases;
+using System.Collections.ObjectModel;
 
 namespace PalmCoastConnect
 {
     public partial class MainPage : ContentPage
     {
         public CaseOptions ConnectCaseOptions { get; set; }
-      
+
 
         public MainPage()
         {
             InitializeComponent();
-           
+            
         }
 
         protected async override void OnAppearing()
@@ -41,32 +42,63 @@ namespace PalmCoastConnect
 
             var tempQuickLinks = await _pccclient.GetQuickCaseChoicesAsync();
             List<QuickLink> orderedQuickLinks = tempQuickLinks.OrderBy(f => f.Title).ToList();
-            //ConnectCaseOptions = new CaseOptions
-            //{
-            //    CaseCategories = orderedCategories,
-            //    QuickLinks = orderedQuickLinks
-            //};
 
 
-
-        }
-
-        async void OnAddClicked(object sender, EventArgs e)
-        {
-            // Navigate to the NoteEntryPage, without passing any data.
-            await Shell.Current.GoToAsync(nameof(NoteEntryPage));
-        }
-
-        async void OnSelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            if (e.CurrentSelection != null)
+            var productIndex = 0;
+            int rowsCategories = (orderedCategories.Count % 3 == 0) ? (orderedCategories.Count / 3) : Convert.ToInt32(Math.Floor((decimal)orderedCategories.Count / 3)) + 1;
+            for (int rowIndex = 0; rowIndex < rowsCategories; rowIndex++)
             {
-                // Navigate to the NoteEntryPage, passing the filename as a query parameter.
-                Note note = (Note)e.CurrentSelection.FirstOrDefault();
-                await Shell.Current.GoToAsync($"{nameof(NoteEntryPage)}?{nameof(NoteEntryPage.ItemId)}={note.Filename}");
+                for (int columnIndex = 0; columnIndex < 2; columnIndex++)
+                {
+                    if (productIndex >= orderedCategories.Count)
+                    {
+                        break;
+                    }
+                    var catergory = orderedCategories[productIndex];
+                    
+                    productIndex += 1;
+                    var label = new Label
+                    {
+                        Text = catergory.Title,
+                        VerticalOptions = LayoutOptions.Center,
+                        HorizontalOptions = LayoutOptions.Center
+                    };
+                    var image = new Image
+                    {
+                        Source = "https://cdn.palmcoastgov.com/images/paw-solid.png",
+                        HeightRequest = 130
+                    };
+                    var stacklayout = new StackLayout
+                    {
+                        Children = { image, label }
+                    };
+                    //On tap event handler
+                    var tapGestureRecognizer = new TapGestureRecognizer();
+                    tapGestureRecognizer.Tapped += (s, e) => {
+                        //Console.WriteLine("Tapped " + catergory.Title);
+                        Navigation.PushAsync(new NoteEntryPage(catergory));
+                    };
+
+                    stacklayout.GestureRecognizers.Add(tapGestureRecognizer);
+                    var frame = new Frame
+                    {
+                        Content = stacklayout,
+                        HeightRequest = 90,
+                        CornerRadius = 25
+                        
+                    };
+
+                    
+                    gridLayout.Children.Add(frame, columnIndex, rowIndex);
+                }
             }
+
+
         }
 
        
+
+       
     }
+
 }
