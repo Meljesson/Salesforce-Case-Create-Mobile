@@ -2,8 +2,49 @@
 <ContentPage
     xmlns="http://xamarin.com/schemas/2014/forms"
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-    x:Class="PalmCoastConnect.Views.CaseCreation">
-    <ContentPage.Content>
-        
+    x:Class="PalmCoastConnect.Views.CaseCreation"
+    xmlns:maps="clr-namespace:Xamarin.Forms.Maps;assembly=Xamarin.Forms.Maps"
+    Title="Case Location"
+    >
+    <ContentPage.Content >
+        <Grid RowDefinitions="*">
+            
+             <maps:Map x:Name="map" HasZoomEnabled="true" IsShowingUser="true" MapClicked="OnMapClicked" Grid.Row="0" >
+                <x:Arguments>
+                    <maps:MapSpan>
+                        <x:Arguments>
+                            <maps:Position>
+                                <x:Arguments>
+                                   
+                                    <x:Double> 29.48657980423532</x:Double>
+                                    <x:Double>-81.2078810446225</x:Double>
+                                </x:Arguments>
+                            </maps:Position>
+                            <x:Double>0.01</x:Double>
+                            <x:Double>0.01</x:Double>
+                        </x:Arguments>
+                    </maps:MapSpan>
+                </x:Arguments>
+            </maps:Map>
+
+
+
+
+             <StackLayout Spacing="0.0" Grid.Row="0">
+              
+                  <SearchBar Placeholder="Search Address" TextChanged="OnTextChanged" SearchButtonPressed="VerifyAddress" x:Name="AddressSearch"/>
+                        <ListView ItemsSource="{Binding Prediction}" x:Name="addressList">
+                          <ListView.ItemTemplate>
+                            <DataTemplate>
+                              <TextCell Text="{Binding Description}" Tapped="OnAddressSelect"/>
+                            </DataTemplate>
+                          </ListView.ItemTemplate>
+                        </ListView>
+             </StackLayout>
+
+
+        </Grid>
+       
+         
     </ContentPage.Content>
 </ContentPage>

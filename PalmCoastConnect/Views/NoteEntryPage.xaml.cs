@@ -22,14 +22,14 @@ namespace PalmCoastConnect.Views
         {
             var requestTypes = _CaseCategory.RequestType;
             RequestMap = new Dictionary<string, RequestType>();
-            List<string> RqTypeTitle = new List<string>();
+           
             foreach(var rtype in requestTypes)
             {
-                RqTypeTitle.Add(rtype.Title);
+               
                 RequestMap.Add(rtype.Title, rtype);
 
             }
-            RequestList.ItemsSource = RqTypeTitle;
+            RequestList.ItemsSource = RequestMap.Keys;
             RequestList.ItemTapped += async (s, e) =>
             {
                 var emi = e.Item;

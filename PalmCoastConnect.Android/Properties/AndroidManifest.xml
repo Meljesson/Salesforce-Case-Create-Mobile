@@ -1,6 +1,8 @@
-﻿<?xml version="1.0" encoding="utf-8"?>
+<?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android" android:versionCode="1" android:versionName="1.0" package="com.cityofpalmcoast.palm_coast_connect">
 	<uses-sdk android:minSdkVersion="21" android:targetSdkVersion="30" />
-	<application android:label="PalmCoastConnect.Android" android:theme="@style/MainTheme"></application>
+	<application android:label="PalmCoastConnect.Android" android:theme="@style/MainTheme">
+        <meta-data android:name="com.google.android.geo.API_KEY" android:value="AIzaSyCEeX_u4ZP9LM47M5J3JFODMLXtrjcBt1g" />
+    </application>
 	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
 </manifest>
