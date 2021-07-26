@@ -1,4 +1,6 @@
 # globs
+LocalApiKeys.cs
+
 Makefile.in
 *.userprefs
 *.usertasks
