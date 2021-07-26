@@ -42,5 +42,7 @@
 	<string>Assets.xcassets/AppIcon.appiconset</string>
 	<key>NSLocationWhenInUseUsageDescription</key>
 	<string>Can we use your location when your application is being used?</string>
+	<key>NSCameraUsageDescription</key>
+	<string>Allow Camera Use to take Photo?</string>
 </dict>
 </plist>

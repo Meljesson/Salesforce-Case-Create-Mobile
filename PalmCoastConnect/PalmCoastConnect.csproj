@@ -19,7 +19,7 @@
     <PackageReference Include="GraphQL" Version="4.5.0" />
     <PackageReference Include="GraphQL.Client" Version="3.2.4" />
     <PackageReference Include="GraphQL.Client.Serializer.Newtonsoft" Version="3.2.4" />
-    <PackageReference Include="Library.SfFactory.Service" Version="5.0.2" />
+    <PackageReference Include="Library.SfFactory.Service" Version="5.0.3" />
     <PackageReference Include="Microsoft.Extensions.DependencyInjection" Version="5.0.1" />
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2083" />
@@ -36,6 +36,7 @@
     <None Remove="Xamarin.Forms.Maps" />
     <None Remove="Xamarin.Forms.PlacesSearchBar" />
     <None Remove="GoogleApi" />
+    <None Remove="Xamarin.CommunityToolkit" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />

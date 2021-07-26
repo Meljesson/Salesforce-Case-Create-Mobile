@@ -7,9 +7,24 @@
     Title="Case Location"
     >
     <ContentPage.Content >
-        <Grid RowDefinitions="*">
+        
             
-             <maps:Map x:Name="map" HasZoomEnabled="true" IsShowingUser="true" MapClicked="OnMapClicked" Grid.Row="0" >
+            
+
+
+
+
+             <StackLayout Spacing="0.0" Grid.Row="0">
+              
+                  <SearchBar Placeholder="Search Address" TextChanged="OnTextChanged" SearchButtonPressed="VerifyAddress" x:Name="AddressSearch"/>
+                        <ListView ItemsSource="{Binding Prediction}" x:Name="addressList">
+                          <ListView.ItemTemplate>
+                            <DataTemplate>
+                              <TextCell Text="{Binding Description}" Tapped="OnAddressSelect"/>
+                            </DataTemplate>
+                          </ListView.ItemTemplate>
+                        </ListView>
+                  <maps:Map x:Name="map" HasZoomEnabled="true" IsShowingUser="true" MapClicked="OnMapClicked" Grid.Row="0" >
                 <x:Arguments>
                     <maps:MapSpan>
                         <x:Arguments>
@@ -26,24 +41,10 @@
                     </maps:MapSpan>
                 </x:Arguments>
             </maps:Map>
-
-
-
-
-             <StackLayout Spacing="0.0" Grid.Row="0">
-              
-                  <SearchBar Placeholder="Search Address" TextChanged="OnTextChanged" SearchButtonPressed="VerifyAddress" x:Name="AddressSearch"/>
-                        <ListView ItemsSource="{Binding Prediction}" x:Name="addressList">
-                          <ListView.ItemTemplate>
-                            <DataTemplate>
-                              <TextCell Text="{Binding Description}" Tapped="OnAddressSelect"/>
-                            </DataTemplate>
-                          </ListView.ItemTemplate>
-                        </ListView>
              </StackLayout>
 
 
-        </Grid>
+      
        
          
     </ContentPage.Content>

@@ -7,22 +7,24 @@ namespace PalmCoastConnect
 {
     public partial class App : Application
     {
-        public static string ApiKey;
-
+        public static string ApiKey { get; set; }
+        public static string StrapiUrl { get; set; }
+        public static string AwsGateWay { get; set; }
 
         public App()
         {
             InitializeComponent();
 
             MainPage = new NavigationPage(new MainPage());
-            ApiKey = "AIzaSyCEeX_u4ZP9LM47M5J3JFODMLXtrjcBt1g";
+            //Holds my apikeys sets them
+            LocalApiKeys local = new LocalApiKeys();
         }
 
         protected override void OnStart()
         {
-            Application.Current.Properties["StrapiUrl"] = "https://manage.palmcoast.gov/graphql";
-
-
+            Application.Current.Properties["StrapiUrl"] = App.StrapiUrl;
+            Application.Current.Properties["AWSGatewayUrl"] = App.AwsGateWay;
+            Application.Current.Properties["GoogleMapApi"] = App.ApiKey;
         }
 
         protected override void OnSleep()

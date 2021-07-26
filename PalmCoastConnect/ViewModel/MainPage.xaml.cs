@@ -30,7 +30,7 @@ namespace PalmCoastConnect
         {
             base.OnAppearing();
 
-
+            
             var StrapiUrl = Application.Current.Properties["StrapiUrl"];
             CMSPalmCoastConnectCasesService _pccclient = new CMSPalmCoastConnectCasesService(StrapiUrl.ToString());
             var tempCategories = await _pccclient.GetCaseCategoriesAsync();

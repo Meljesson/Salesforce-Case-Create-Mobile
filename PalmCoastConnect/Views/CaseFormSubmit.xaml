@@ -1,0 +1,76 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    x:Class="PalmCoastConnect.Views.CaseFormSubmit">
+    
+    <ContentPage.Content>
+        <StackLayout>
+
+            <Frame>
+                <StackLayout>
+                    <Label x:Name="requestLabel" FontSize="Large"/>
+                    <Label x:Name="subRequestLabel" FontSize="Caption" />
+                </StackLayout>
+                
+               
+            </Frame>
+            
+            <Frame>
+               <StackLayout >
+                    <Label Text="Full Name" />
+                    <Entry Placeholder="Name" x:Name="GuestName">
+
+                    </Entry>
+              
+                
+            
+             
+                    <Label Text="Phone Number" />
+                    <Entry Placeholder="555-555-5555" x:Name="GuestPhone">
+
+                    </Entry>
+             
+                
+            
+               
+                    <Label Text="Email" />
+                    <Entry Placeholder="user@email.com" x:Name="SuppliedEmail">
+
+                    </Entry>
+             
+                
+           
+            
+                    <Label Text="Address" x:Name="addressLabel" />
+                    <Entry Placeholder="Your Address" x:Name="SubmitterAddress">
+
+                    </Entry>
+
+                
+                    
+               
+               </StackLayout>
+                
+            </Frame>
+            <Frame>
+                <StackLayout>
+                     <Label Text="Description" />
+                   <Editor Placeholder="Case Description..." HeightRequest="250" x:Name="ticketDescription">
+
+                   </Editor>
+                </StackLayout>
+            </Frame>
+
+            <!--<Frame>
+                 <Button Text="Add Photo" FontSize="Large" Clicked="OnTakePhoto"></Button>
+            </Frame>-->
+           
+
+            <Button Text="Submit" FontSize="Large" Clicked="onSubmitCase"></Button>
+            
+            
+            
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>
