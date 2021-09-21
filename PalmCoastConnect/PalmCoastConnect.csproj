@@ -24,6 +24,11 @@
     <PackageReference Include="Xamarin.FFImageLoading.Svg.Forms" Version="2.4.11.982" />
     <PackageReference Include="Xamarin.Forms.Maps" Version="5.0.0.2083" />
     <PackageReference Include="GoogleApi" Version="3.10.11" />
+    <PackageReference Include="SkiaSharp.Views.Forms" Version="2.80.3" />
+    <PackageReference Include="Xamarin.FFImageLoading" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Forms" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Svg" Version="2.4.11.982" />
+    <PackageReference Include="Xamarin.FFImageLoading.Transformations" Version="2.4.11.982" />
   </ItemGroup>
   <ItemGroup>
     <None Remove="Models\" />
@@ -37,11 +42,28 @@
     <None Remove="Xamarin.Forms.PlacesSearchBar" />
     <None Remove="GoogleApi" />
     <None Remove="Xamarin.CommunityToolkit" />
+    <None Remove="SkiaSharp.Views.Forms" />
+    <None Remove="Xamarin.FFImageLoading" />
+    <None Remove="Xamarin.FFImageLoading.Forms" />
+    <None Remove="Xamarin.FFImageLoading.Svg" />
+    <None Remove="Xamarin.FFImageLoading.Transformations" />
+    <None Remove="Resources\" />
+    <None Remove="Resources\BackOverlay1.svg" />
+    <None Remove="Resources\BackOverlay2.svg" />
+    <None Remove="Resources\citylogo.svg" />
+    <None Remove="Resources\sysBackground.svg" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Models\" />
     <Folder Include="Views\" />
     <Folder Include="Assets\" />
     <Folder Include="ViewModel\" />
+    <Folder Include="Resources\" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Resources\BackOverlay1.svg" />
+    <EmbeddedResource Include="Resources\BackOverlay2.svg" />
+    <EmbeddedResource Include="Resources\citylogo.svg" />
+    <EmbeddedResource Include="Resources\sysBackground.svg" />
   </ItemGroup>
 </Project>

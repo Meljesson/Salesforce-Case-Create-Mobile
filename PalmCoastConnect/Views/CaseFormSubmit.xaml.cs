@@ -92,7 +92,8 @@ namespace PalmCoastConnect.Views
             }
 
             ISfFactoryService _sfServiceClient = new SfFactoryClient();
-            var CreatedCase = await _sfServiceClient.CreateSfCase("https://1f71wud3gk.execute-api.us-east-1.amazonaws.com/dev", ticket);
+            var SfUrl = Application.Current.Properties["AWSGatewayUrl"];
+            var CreatedCase = await _sfServiceClient.CreateSfCase(SfUrl.ToString(), ticket);
 
             Console.WriteLine("Submitted!");
         }

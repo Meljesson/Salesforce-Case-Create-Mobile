@@ -15,6 +15,7 @@ namespace PalmCoastConnect
         {
             InitializeComponent();
 
+            // MainPage = new NavigationPage(new Splash());
             MainPage = new NavigationPage(new MainPage());
             //Holds my apikeys sets them
             LocalApiKeys local = new LocalApiKeys();

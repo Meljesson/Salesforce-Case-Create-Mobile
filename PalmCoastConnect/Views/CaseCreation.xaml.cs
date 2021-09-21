@@ -13,13 +13,19 @@ using GoogleApi.Entities.Places.Common;
 using System.Threading;
 using GoogleApi.Entities.Places.Details.Request;
 using GoogleApi.Entities.Places.Details.Response;
+using GoogleApi.Entities.Places.AutoComplete.Response;
+using System.Threading.Tasks;
 
 namespace PalmCoastConnect.Views
 {
     public partial class CaseCreation : ContentPage
     {
         private RequestType _RequestType { get; set; }
-        private RequestSubType _SubRequest {get; set;}
+        private RequestSubType _SubRequest { get; set; }
+        private PlacesAutoCompleteResponse autoComplete {get; set;}
+        private PlacesDetailsResponse placesDetail { get; set; }
+
+
         public CaseCreation(RequestType request, RequestSubType subrequest)
         {
             InitializeComponent();
@@ -29,18 +35,48 @@ namespace PalmCoastConnect.Views
 
 
         }
-        protected override void OnAppearing()
+        protected async override void OnAppearing()
         {
             base.OnAppearing();
 
             OnAlertCaseCreate();
 
-            
 
+            var status = await Permissions.RequestAsync<Permissions.LocationWhenInUse>();
         }
+
+        private async Task GetPlaceDetails(string address)
+        {
+            var GMapApiKey = Application.Current.Properties["GoogleMapApi"];
+            var request = new PlacesAutoCompleteRequest
+            {
+                Key = App.ApiKey,
+                Input = address,
+                Types = new List<RestrictPlaceType> { RestrictPlaceType.Address },
+
+            };
+
+            autoComplete = await GooglePlaces.AutoComplete.QueryAsync(request);
+
+            
+            var request2 = new PlacesDetailsRequest
+            {
+                Key = GMapApiKey.ToString(),
+                PlaceId = autoComplete.Predictions.Select(x => x.PlaceId).FirstOrDefault(),
+
+            };
+
+            placesDetail = await GooglePlaces.Details.QueryAsync(request2);
+        }
+
 
         async void OnAlertCaseCreate()
         {
+            var status = await Permissions.CheckStatusAsync<Permissions.LocationWhenInUse>();
+            if(status != PermissionStatus.Granted)
+            {
+                return;
+            }
             bool answer = await DisplayAlert("Choose Case Location", "Would you like to use current location?", "Yes", "No");
             if(answer)
             {
@@ -56,24 +92,9 @@ namespace PalmCoastConnect.Views
                 string address = possibleAddresses.FirstOrDefault();
 
                 //Google Api to get Place Details
-                var request = new PlacesAutoCompleteRequest
-                {
-                    Key = App.ApiKey,
-                    Input = address,
-                    Types = new List<RestrictPlaceType> { RestrictPlaceType.Address },
+                await GetPlaceDetails(address);
 
-                };
-                var response = await GooglePlaces.AutoComplete.QueryAsync(request);
-
-                ObservableCollection<Prediction> predictions = new ObservableCollection<Prediction>(response.Predictions);
-                var request2 = new PlacesDetailsRequest
-                {
-                    Key = App.ApiKey,
-                    PlaceId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault(),
-
-                };
-
-                var responseDetails = await GooglePlaces.Details.QueryAsync(request2);
+              
 
                 Pin pin = new Pin
                 {
@@ -87,7 +108,7 @@ namespace PalmCoastConnect.Views
                 
                 AddressSearch.Text = address;
                
-                CaseFormsPage(this._RequestType, this._SubRequest, location, responseDetails);
+                CaseFormsPage(this._RequestType, this._SubRequest, location, placesDetail);
 
 
             }
@@ -127,27 +148,10 @@ namespace PalmCoastConnect.Views
             IEnumerable<string> possibleAddresses = await geoCoder.GetAddressesForPositionAsync(position);
 
             string address = possibleAddresses.FirstOrDefault();
+            await GetPlaceDetails(address);
+        
 
-            var request = new PlacesAutoCompleteRequest
-            {
-                Key = App.ApiKey,
-                Input = address,
-                Types = new List<RestrictPlaceType> { RestrictPlaceType.Address },
-
-            };
-            var response = await GooglePlaces.AutoComplete.QueryAsync(request);
-
-            ObservableCollection<Prediction> predictions = new ObservableCollection<Prediction>(response.Predictions);
-            var request2 = new PlacesDetailsRequest
-            {
-                Key = App.ApiKey,
-                PlaceId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault(),
-
-            };
-
-            var responseDetails = await GooglePlaces.Details.QueryAsync(request2);
-
-            CaseFormsPage(this._RequestType, this._SubRequest, location, responseDetails);
+            CaseFormsPage(this._RequestType, this._SubRequest, location, placesDetail);
         }
 
         private async void OnTextChanged(object sender, EventArgs eventArgs)
@@ -157,23 +161,10 @@ namespace PalmCoastConnect.Views
             if (textEntry.Text.Length >= 3)
             {
                 addressList.IsVisible = true;
-                var request = new PlacesAutoCompleteRequest
-                {
-                    Key = App.ApiKey,
-                    Input = textEntry.Text,
-                    Types = new List<RestrictPlaceType> { RestrictPlaceType.Address },
-                    
-                };
 
-                var response = await GooglePlaces.AutoComplete.QueryAsync(request);
-                ObservableCollection<Prediction> predictions = new ObservableCollection<Prediction>(response.Predictions);
-                var request2 = new PlacesDetailsRequest
-                {
-                    Key = App.ApiKey,
-                    PlaceId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault(),
-                    
-                };
-                var response2 = GooglePlaces.Details.Query(request2);
+                await GetPlaceDetails(textEntry.Text);
+                ObservableCollection<Prediction> predictions = new ObservableCollection<Prediction>(this.autoComplete.Predictions);
+               
                 addressList.ItemsSource = predictions;
                 
                
@@ -222,28 +213,11 @@ namespace PalmCoastConnect.Views
             map.Pins.Add(pin);
 
             //Google Api to get Place Details
-            var request = new PlacesAutoCompleteRequest
-            {
-                Key = App.ApiKey,
-                Input = AddressSearch.Text,
-                Types = new List<RestrictPlaceType> { RestrictPlaceType.Address },
-
-            };
-            var response = await GooglePlaces.AutoComplete.QueryAsync(request);
-
-            ObservableCollection<Prediction> predictions = new ObservableCollection<Prediction>(response.Predictions);
-            var request2 = new PlacesDetailsRequest
-            {
-                Key = App.ApiKey,
-                PlaceId = response.Predictions.Select(x => x.PlaceId).FirstOrDefault(),
-
-            };
-
-            var responseDetails = await GooglePlaces.Details.QueryAsync(request2);
+            await GetPlaceDetails(AddressSearch.Text);
 
 
 
-            CaseFormsPage(this._RequestType, this._SubRequest, location, responseDetails);
+            CaseFormsPage(this._RequestType, this._SubRequest, location, placesDetail);
         }
     }
 }

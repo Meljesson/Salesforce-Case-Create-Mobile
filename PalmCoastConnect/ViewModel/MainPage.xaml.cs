@@ -48,7 +48,7 @@ namespace PalmCoastConnect
             int rowsCategories = (orderedCategories.Count % 3 == 0) ? (orderedCategories.Count / 3) : Convert.ToInt32(Math.Floor((decimal)orderedCategories.Count / 3)) + 1;
             for (int rowIndex = 0; rowIndex < rowsCategories; rowIndex++)
             {
-                for (int columnIndex = 0; columnIndex < 2; columnIndex++)
+                for (int columnIndex = 0; columnIndex < 3; columnIndex++)
                 {
                     if (productIndex >= orderedCategories.Count)
                     {
@@ -66,11 +66,12 @@ namespace PalmCoastConnect
                     var image = new Image
                     {
                         Source = "https://cdn.palmcoastgov.com/images/paw-solid.png",
-                        HeightRequest = 130
+                        HeightRequest = 25
                     };
                     var stacklayout = new StackLayout
                     {
-                        Children = { image, label }
+                        Children = { image, label },
+
                     };
                     //On tap event handler
                     var tapGestureRecognizer = new TapGestureRecognizer();
@@ -82,14 +83,17 @@ namespace PalmCoastConnect
                     stacklayout.GestureRecognizers.Add(tapGestureRecognizer);
                     var frame = new Frame
                     {
-                        Content = stacklayout,
-                        HeightRequest = 90,
-                        CornerRadius = 25
+                       
+                        HeightRequest = 35,
+                        WidthRequest = 45,
+                        CornerRadius = 20,
+                        BorderColor = Color.Black
                         
                     };
 
                     
                     gridLayout.Children.Add(frame, columnIndex, rowIndex);
+                    
                 }
             }
 

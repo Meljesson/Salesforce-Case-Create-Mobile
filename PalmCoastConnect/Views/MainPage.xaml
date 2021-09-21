@@ -2,14 +2,15 @@
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PalmCoastConnect.MainPage"
-             Title="Choose Case Category">
+             Title="Choose Case Category"
+             xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms">
 
    <ScrollView>
-       <Grid x:Name="gridLayout" BackgroundColor="CadetBlue">
+       <Grid x:Name="gridLayout" BackgroundColor="WhiteSmoke">
          
-           
+         
        </Grid>
-   
+       
    </ScrollView>
    
 

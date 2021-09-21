@@ -68,6 +68,8 @@
     <None Include="Entitlements.plist" />
     <None Include="Info.plist" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <None Include="Resources\BackOverlay1.svg" />
+    <None Include="Resources\BackOverlay2.svg" />
   </ItemGroup>
   <ItemGroup>
     <InterfaceDefinition Include="Resources\LaunchScreen.storyboard" />
@@ -132,5 +134,10 @@
       <Project>{13E184D1-DB96-474E-9A55-D3910F60BB1E}</Project>
       <Name>PalmCoastConnect</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <BundleResource Include="Resources\app.config" />
+    <BundleResource Include="Resources\citylogo.svg" />
+    <BundleResource Include="Resources\sysBackground.svg" />
   </ItemGroup>
 </Project>

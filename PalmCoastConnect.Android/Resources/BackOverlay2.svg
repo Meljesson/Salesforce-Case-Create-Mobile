@@ -1,0 +1,10 @@
+<svg id="Component_8_1" data-name="Component 8 – 1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" width="716" height="812" viewBox="0 0 716 812">
+  <defs>
+    <linearGradient id="linear-gradient" x1="0.587" y1="0.176" x2="0.605" y2="0.99" gradientUnits="objectBoundingBox">
+      <stop offset="0" stop-color="#b5f1ff"/>
+      <stop offset="0.238" stop-color="#78d5d1"/>
+      <stop offset="1" stop-color="#156fea"/>
+    </linearGradient>
+  </defs>
+  <ellipse id="Ellipse_2" data-name="Ellipse 2" cx="358" cy="406" rx="358" ry="406" opacity="0.75" fill="url(#linear-gradient)"/>
+</svg>

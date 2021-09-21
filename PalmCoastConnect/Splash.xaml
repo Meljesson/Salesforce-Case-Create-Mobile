@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<ContentPage
+    xmlns="http://xamarin.com/schemas/2014/forms"
+    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+    xmlns:skia="clr-namespace:SkiaSharp.Views.Forms;assembly=SkiaSharp.Views.Forms"
+    xmlns:ffSvg="clr-namespace:FFImageLoading.Svg.Forms;assembly=FFImageLoading.Svg.Forms"
+    x:Class="PalmCoastConnect.Views.Splash">
+    <ContentPage.Content>
+        <AbsoluteLayout>
+           
+             
+            <ffSvg:SvgCachedImage x:Name="SvgImageBack_2" Source="resource://PalmCoastConnect.Resources.BackOverlay2.svg" AbsoluteLayout.LayoutBounds="-150, -180, 720, 800" />
+            <ffSvg:SvgCachedImage x:Name="SvgImageBack_1" Source="resource://PalmCoastConnect.Resources.BackOverlay1.svg" AbsoluteLayout.LayoutBounds="-80, -215, 720, 800" />
+            <ffSvg:SvgCachedImage x:Name="citylogo" Source="resource://PalmCoastConnect.Resources.citylogo.svg" AbsoluteLayout.LayoutBounds="120, 160, 150, 150" />
+            <Label Text="Palm Coast Connect" FontFamily="Comic Sans MS" AbsoluteLayout.LayoutBounds="115, 320, 200, 200" FontAttributes="Bold" TextColor="White"/>
+           
+        </AbsoluteLayout>
+    </ContentPage.Content>
+</ContentPage>
